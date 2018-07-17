@@ -1,6 +1,6 @@
 void *CreateAndMapSharedMemory(const char *const name, const size_t size)
 {
-    void *shmptr = GLO_NULL;
+    void *shmptr = NULL;
     int   shmdes = -1;
     char  shmName[128];
 
@@ -18,7 +18,7 @@ void *CreateAndMapSharedMemory(const char *const name, const size_t size)
         goto error_out;
     }
 
-    if ((shmptr = mmap(GLO_NULL,size,PROT_WRITE | PROT_READ, MAP_SHARED,shmdes,0)) == (void *)(-1))
+    if ((shmptr = mmap(NULL,size,PROT_WRITE | PROT_READ, MAP_SHARED,shmdes,0)) == (void *)(-1))
     {
         printf("mapping shared memory '%s' failed, errno %d",shmName,errno);
         shm_unlink(shmName);
@@ -33,6 +33,6 @@ error_out:
     {
         (void)close(shmdes);
     }
-    return GLO_NULL;
+    return NULL;
 }
 
